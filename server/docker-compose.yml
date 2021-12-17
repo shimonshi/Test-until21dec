@@ -1,0 +1,15 @@
+version: "4.1.1"
+services:
+  db:
+    image: postgres
+    enviroment:
+    POSTGRES_PASSWORD: test
+    POSTGRES_USER: test
+    POSTGRES_DB: db_test
+    volumes:
+    - ./pgdata:/var/lib/posgresql/data
+    ports:
+    - '5432:5432'
+    web:
+    image: example_test
+    
