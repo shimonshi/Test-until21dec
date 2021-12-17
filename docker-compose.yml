@@ -1,0 +1,24 @@
+version: "4.1.1"
+services:
+  postgres:
+    image: postgres:13.3
+    environment:
+      POSTGRES_DB: "test"
+      POSTGRES_USER: "test"
+      POSTGRES_PASSWORD: "123"
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./db-data:/data/db
+
+  node_test:
+    image: node_test
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    environment:
+      NODE_ENV: production
+      DATABASE_URL: postgresql://test:123@postgres:5432/test
+    ports:
+      - 3000:3000
+    
