@@ -3,7 +3,7 @@ const helmet = require('helmet');
 const dev = require('../routes/dev');
 const sequelize = require('../db/index');
 const Workers = require('../routes/workers');
-const Departments = require('../routes/departments');
+const Departments = require('../routes/department');
 
 const app = express();
 
@@ -18,7 +18,7 @@ app.use('/department', Departments);
 (async () => {
   try {
     await sequelize.sync(
-      { force: true },
+      { force: false },
     );
     const server = app.listen(3000);
     process.once('SIGINT', () => server.close());

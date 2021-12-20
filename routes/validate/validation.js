@@ -9,13 +9,20 @@ const validateInput = (req, res, next) => {
   return next();
 };
 
-const userValidation = [
-  check('first_Name').notEmpty().isString(),
-  check('last_Name').notEmpty().isString(),
+const workerValidation = [
+  check('fName').notEmpty().isString(),
+  check('lName').notEmpty().isString(),
   check('email').notEmpty().isEmail(),
-  check('phoneNumber').notEmpty().isLength({ min: 5 }),
+  check('pNumber').notEmpty().isLength({ min: 5 }),
   check('about').notEmpty().isString(),
 ];
-const getUserValidate = [...userValidation, validateInput];
+const getWorkerValidation = [...workerValidation, validateInput];
 
-module.exports = getUserValidate;
+const departmentValidation = [
+  check('name').notEmpty().isString(),
+  check('info').notEmpty().isString(),
+];
+const getDepartmentValidate = [...departmentValidation, validateInput];
+
+module.exports = getWorkerValidation;
+module.exports = getDepartmentValidate;

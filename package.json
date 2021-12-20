@@ -4,6 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "migrate": "npx sequelize-cli db:migrate",
+    "down": "npx sequelize-cli db:migrate:undo",
+    "seed-create": "npx sequelize-cli seed:generate --name demo",
+    "seed": "npx sequelize-cli db:seed:all",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -21,11 +25,12 @@
     "express-validator": "^6.14.0",
     "helmet": "^4.6.0",
     "pg": "^8.7.1",
-    "sequelize": "^6.12.0-beta.3"
+    "sequelize": "^6.12.0"
   },
   "devDependencies": {
     "eslint": "^8.4.1",
     "eslint-config-airbnb-base": "^15.0.0",
-    "eslint-plugin-import": "^2.25.3"
+    "eslint-plugin-import": "^2.25.3",
+    "sequelize-cli": "^6.3.0"
   }
 }

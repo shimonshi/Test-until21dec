@@ -1,12 +1,12 @@
 const router = require('express').Router();
-const controller = require('../controllers/workers');
-const getUserValidate = require('./validate/validation');
+const controller = require('../controllers/worker');
+const getWorkerValidation = require('./validate/validation');
 
 router
   .get('/', controller.getAll)
   .get('/:id', controller.getOne)
-  .post('/', getUserValidate, controller.createOne)
-  .put('/:id', getUserValidate, controller.updateOne)
+  .post('/', getWorkerValidation, controller.createOne)
+  .put('/:id', getWorkerValidation, controller.updateOne)
   .delete('/:id', controller.deleteOne);
 
 module.exports = router;

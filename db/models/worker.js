@@ -1,18 +1,18 @@
 const Sequelize = require('sequelize');
 const db = require('../index');
 
-const Workers = db.define('workers', {
+const Worker = db.define('worker', {
   id: {
     type: Sequelize.INTEGER,
     autoIncrement: true,
     allowNull: false,
     primaryKey: true,
   },
-  first_Name: {
+  fName: {
     type: Sequelize.STRING,
     allowNull: false,
   },
-  last_Name: {
+  lName: {
     type: Sequelize.STRING,
     allowNull: false,
   },
@@ -21,7 +21,7 @@ const Workers = db.define('workers', {
     allowNull: false,
     unique: true,
   },
-  phoneNumber: {
+  pNumber: {
     type: Sequelize.STRING,
     allowNull: false,
     unique: true,
@@ -30,6 +30,10 @@ const Workers = db.define('workers', {
     type: Sequelize.STRING,
     allowNull: false,
   },
+  departmentId: {
+    type: Sequelize.INTEGER,
+    allowNull: false,
+  },
 });
 
-module.exports = Workers;
+module.exports = Worker;

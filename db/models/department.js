@@ -1,7 +1,7 @@
 const Sequelize = require('sequelize');
 const db = require('../index');
 
-const Departments = db.define('departments', {
+const Department = db.define('department', {
   id: {
     type: Sequelize.INTEGER,
     autoIncrement: true,
@@ -19,4 +19,4 @@ const Departments = db.define('departments', {
   },
 });
 
-module.exports = Departments;
+module.exports = Department;

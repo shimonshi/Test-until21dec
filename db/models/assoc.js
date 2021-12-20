@@ -1,5 +1,5 @@
 require('../index');
-const Workers = require('./workers');
+const Workers = require('./worker');
 const Departments = require('./department');
 
 Departments.hasMany(Workers, {
@@ -7,6 +7,7 @@ Departments.hasMany(Workers, {
   onDelete: 'Cascade',
   onUpdate: 'Cascade',
 });
+
 Workers.belongsToMany(Departments);
 
 Workers.hasOne(Departments, {
