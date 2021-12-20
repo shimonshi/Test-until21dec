@@ -1,32 +1,22 @@
 const Sequelize = require('sequelize');
 const db = require('../index');
 
-const User = db.define('users', {
+const Departments = db.define('departments', {
   id: {
     type: Sequelize.INTEGER,
     autoIncrement: true,
     allowNull: false,
     primaryKey: true,
   },
-  groupId: {
-    type: Sequelize.INTEGER,
-    allowNull: false,
-  },
-  username: {
+  name: {
     type: Sequelize.STRING,
     allowNull: false,
     unique: true,
   },
-  email: {
+  info: {
     type: Sequelize.STRING,
     allowNull: false,
-    unique: true,
-  },
-  phoneNumber: {
-    type: Sequelize.INTEGER,
-    allowNull: false,
-    unique: true,
   },
 });
 
-module.exports = User;
+module.exports = Departments;

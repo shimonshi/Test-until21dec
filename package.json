@@ -18,6 +18,7 @@
   "homepage": "https://github.com/shimonshi/Test-until21dec#readme",
   "dependencies": {
     "express": "^4.17.2",
+    "express-validator": "^6.14.0",
     "helmet": "^4.6.0",
     "pg": "^8.7.1",
     "sequelize": "^6.12.0-beta.3"

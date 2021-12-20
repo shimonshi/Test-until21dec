@@ -1,5 +1,5 @@
 const { Sequelize } = require('sequelize');
 
-const sequelize = new Sequelize('postgres://user:pass@example.com:5432/dbname'); // Example for postgres
+const sequelize = new Sequelize(process.env.DATABASE_URL);
 
 module.exports = sequelize;
