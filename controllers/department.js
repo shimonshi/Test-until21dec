@@ -1,4 +1,4 @@
-const Department = require('../db/models/department');
+const { Department } = require('../db/models');
 
 const getAll = async (req, res) => {
   try {
@@ -12,7 +12,10 @@ const getAll = async (req, res) => {
 const getOne = async (req, res) => {
   try {
     const department = await Department.findByPk(req.params.id);
-    return res.status(200).json(department);
+    if (department) {
+      return res.status(200).json(department);
+    }
+    return res.status(404).end();
   } catch (error) {
     return res.status(500).json(error);
   }
@@ -20,29 +23,26 @@ const getOne = async (req, res) => {
 
 const createOne = async (req, res) => {
   try {
-    // eslint-disable-next-line camelcase
-    const department_Model = {
+    const departmentData = {
       id: req.params.id,
       name: req.body.name,
       info: req.body.info,
     };
-    try {
-      const department = await Department.create(department_Model);
-      console.log('department created');
-      return res.status(200).json(department);
-    } catch (error) {
-      return res.status(500).json(error);
-    }
+    const department = await Department.create(departmentData);
+    return res.status(200).json(department);
   } catch (error) {
+    // eslint-disable-next-line no-console
+    console.error(error);
     return res.status(500).json(error);
   }
 };
 
 const deleteOne = async (req, res) => {
   try {
-    const department = await Department
+    const amountDeleted = await Department
       .destroy({ where: { id: req.params.id } });
-    return res.status(200).json(department);
+    if (amountDeleted < 1) { return res.status(404).end(); }
+    return res.status(200).end();
   } catch (error) {
     return res.status(500).json(error);
   }
@@ -50,20 +50,15 @@ const deleteOne = async (req, res) => {
 
 const updateOne = async (req, res) => {
   try {
-    // eslint-disable-next-line camelcase
-    const department_Model = {
+    const departmentData = {
       id: req.params.id,
       name: req.body.name,
       info: req.body.info,
     };
-    try {
-      const department = await Department
-        .update(department_Model, { where: { id: req.params.id } });
-      return res.status(200).json(department);
-    } catch (error) {
-      // eslint-disable-next-line no-console
-      return console.log('321');
-    }
+    const [amountChanged, [newDepartment]] = await Department
+      .update(departmentData, { where: { id: req.params.id }, returning: true });
+    if (amountChanged < 1) { return res.status(404).end(); }
+    return res.status(200).json(newDepartment);
   } catch (error) {
     return res.status(500).json(error);
   }

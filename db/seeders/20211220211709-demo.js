@@ -1,68 +1,63 @@
-'use strict';
-
 module.exports = {
-  up: async (queryInterface, Sequelize) => {
-    await queryInterface.bulkInsert(
-      'worker',
+  up: async (queryInterface) => {
+    const [depFirst, depSecond] = await queryInterface.bulkInsert(
+      'departments',
       [
         {
-          id: 1,
-          fName: 'alex',
-          lName: 'alexandrov',
-          email: 'user1@test.com',
-          pNumber: '6924242',
-          created_at: new Date(),
-          updated_at: new Date(),
+          name: 'IT-department',
+          info: 'abcdqweqe',
+          createdAt: new Date(),
+          updatedAt: new Date(),
         },
         {
-          id: 2,
-          fName: 'adam',
-          lName: 'adamov',
-          email: 'user2@test.com',
-          pNumber: '1234567',
-          created_at: new Date(),
-          updated_at: new Date(),
-        },
-        {
-          id: 3,
-          name: 'user3',
-          email: 'user3@test.com',
-          created_at: new Date(),
-          updated_at: new Date(),
+          name: 'It-department2',
+          info: 'abcdqweqedadadadsad',
+          createdAt: new Date(),
+          updatedAt: new Date(),
         },
       ],
-      {},
+      { returning: ['id'] },
     );
     await queryInterface.bulkInsert(
-      'department',
+      'workers',
       [
         {
-          id: 1,
-          name: 'IT-department',
-          about: 'abcdqweqe',
-          created_at: new Date(),
-          updated_at: new Date(),
+          firstName: 'alex',
+          lastName: 'alexandrov',
+          email: 'user1@test.com',
+          phoneNumber: '6924242',
+          about: 'first user',
+          departmentId: depFirst.id,
+          createdAt: new Date(),
+          updatedAt: new Date(),
         },
         {
-          id: 2,
-          name: 'It-department2',
-          about: 'abcdqweqedadadadsad',
-          created_at: new Date(),
-          updated_at: new Date(),
+          firstName: 'adam',
+          lastName: 'adamov',
+          email: 'user2@test.com',
+          phoneNumber: '1234567',
+          about: 'second user',
+          departmentId: depSecond.id,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+        {
+          firstName: 'Firstname3',
+          lastName: 'Lastname3',
+          email: 'user3@test.com',
+          phoneNumber: '12345647',
+          about: 'third user',
+          departmentId: depSecond.id,
+          createdAt: new Date(),
+          updatedAt: new Date(),
         },
       ],
       {},
     );
   },
 
-  down: async (queryInterface, Sequelize) => {
-    /**
-     * Add commands to revert seed here.
-     *
-     * Example:
-     * await queryInterface.bulkDelete('People', null, {});
-     */
-    await queryInterface.bulkDelete('worker', null, bulkDeleteOptions);
-    await queryInterface.bulkDelete('department', null, bulkDeleteOptions);
+  down: async (queryInterface) => {
+    await queryInterface.bulkDelete('workers', null, {});
+    await queryInterface.bulkDelete('departments', null, {});
   },
 };

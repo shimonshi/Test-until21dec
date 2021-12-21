@@ -1,9 +1,6 @@
 const express = require('express');
 const helmet = require('helmet');
-const dev = require('../routes/dev');
-const sequelize = require('../db/index');
-const Workers = require('../routes/workers');
-const Departments = require('../routes/department');
+const { initRoutes } = require('../routes');
 
 const app = express();
 
@@ -11,16 +8,13 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 app.use(helmet());
-app.use('/dev', dev());
-app.use('/workers', Workers);
-app.use('/department', Departments);
+
+initRoutes(app);
 
 (async () => {
   try {
-    await sequelize.sync(
-      { force: false },
-    );
-    const server = app.listen(3000);
+    // eslint-disable-next-line no-console
+    const server = app.listen(3000, () => console.log('Server is running'));
     process.once('SIGINT', () => server.close());
     process.once('SIGTERM', () => server.close());
   } catch (error) {

@@ -1,12 +1,12 @@
 const router = require('express').Router();
 const controller = require('../controllers/department');
-const getDepartmentValidate = require('./validate/validation');
+const { createDepartmentValidation } = require('./validation');
 
 router
   .get('/', controller.getAll)
   .get('/:id', controller.getOne)
-  .post('/', getDepartmentValidate, controller.createOne)
-  .put('/:id', getDepartmentValidate, controller.updateOne)
+  .post('/', createDepartmentValidation, controller.createOne)
+  .put('/:id', createDepartmentValidation, controller.updateOne)
   .delete('/:id', controller.deleteOne);
 
 module.exports = router;

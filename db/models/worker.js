@@ -8,11 +8,11 @@ const Worker = db.define('worker', {
     allowNull: false,
     primaryKey: true,
   },
-  fName: {
+  firstName: {
     type: Sequelize.STRING,
     allowNull: false,
   },
-  lName: {
+  lastName: {
     type: Sequelize.STRING,
     allowNull: false,
   },
@@ -21,7 +21,7 @@ const Worker = db.define('worker', {
     allowNull: false,
     unique: true,
   },
-  pNumber: {
+  phoneNumber: {
     type: Sequelize.STRING,
     allowNull: false,
     unique: true,
